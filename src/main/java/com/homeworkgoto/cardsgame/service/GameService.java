@@ -10,11 +10,7 @@ public interface GameService {
 
     GameDto createGame(GameDto gameDto);
 
-    PlayerDto addPlayer(PlayerDto playerDto);
-
-    void removePlayer(int playerId);
-
-    List<PlayerDto> getGamePlayers(int gameId);
+    boolean deleteGame(Integer gameId);
 
     List<GameDto> getGames();
 

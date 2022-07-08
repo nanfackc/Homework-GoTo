@@ -3,6 +3,8 @@ package com.homeworkgoto.cardsgame.service;
 import com.homeworkgoto.cardsgame.data.domain.DeckCard;
 import com.homeworkgoto.cardsgame.data.repository.DeckCardRepository;
 import com.homeworkgoto.cardsgame.mapper.CardMapper;
+import com.homeworkgoto.cardsgame.model.CardDescriptor;
+import com.homeworkgoto.cardsgame.model.Rank;
 import com.homeworkgoto.cardsgame.model.Suit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @Slf4j
@@ -46,8 +47,7 @@ public class DeckCardServiceImpl implements DeckCardService {
     }
 
     public void dealCards(Integer gameId, Integer playerId) {
-        List<DeckCard> list = deckCardRepository.findByGameIdAndDealtToPlayerIsNull(gameId);
-        list.sort(Comparator.comparing(DeckCard::getCardPosition));
+        List<DeckCard> list = getUndealtCard(gameId);
         DeckCard deckCard = list.get(list.size()-1);
         deckCard.setDealtToPlayer(playerId);
         deckCardRepository.save(deckCard);
@@ -61,6 +61,22 @@ public class DeckCardServiceImpl implements DeckCardService {
             countSuit.put(Suit.valueOf(deckCard.getSuit()), count + 1);
         }
         return countSuit;
+    }
+
+    public List<CardDescriptor> showUndealtCard(Integer gameId) {
+        return getUndealtCard(gameId).stream().map(deckCard -> {
+                return CardDescriptor.builder()
+                        .rank(Rank.valueOf(deckCard.getRank()))
+                        .suit(Suit.valueOf(deckCard.getSuit()))
+                        .build();
+        }).collect(Collectors.toList());
+    }
+
+
+    private List<DeckCard> getUndealtCard(int gameId) {
+        List<DeckCard> list = deckCardRepository.findByGameIdAndDealtToPlayerIsNull(gameId);
+        list.sort(Comparator.comparing(DeckCard::getCardPosition));
+        return list;
     }
 
 }

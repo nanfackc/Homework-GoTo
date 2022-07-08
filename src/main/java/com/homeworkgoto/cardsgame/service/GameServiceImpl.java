@@ -33,35 +33,9 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public PlayerDto addPlayer(PlayerDto playerDto) {
-
-        GamePlayer gamePlayer = new GamePlayer();
-        gamePlayer.setGameId(playerDto.getGameId());
-        gamePlayer.setName(playerDto.getName());
-
-        gamePlayer = gamePlayerRepository.save(gamePlayer);
-
-        return PlayerDto.builder().gameId(gamePlayer.getGameId())
-                .id(gamePlayer.getId())
-                .name(gamePlayer.getName()).build();
-    }
-
-    @Override
-    public void removePlayer(int playerId) {
-        gamePlayerRepository.deleteById(playerId);
-    }
-
-    @Override
-    public List<PlayerDto> getGamePlayers(int gameId) {
-        return gamePlayerRepository.findByGameId(gameId).stream()
-                .map(gamePlayer -> {
-                    return PlayerDto.builder()
-                        .gameId(gameId)
-                        .name(gamePlayer.getName())
-                        .id(gamePlayer.getId())
-                        .build();
-
-        }).collect(Collectors.toList());
+    public boolean deleteGame(Integer gameId) {
+        gameRepository.deleteById(gameId);
+        return true;
     }
 
     @Override
