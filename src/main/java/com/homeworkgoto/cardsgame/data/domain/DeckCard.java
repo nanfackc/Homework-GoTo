@@ -3,10 +3,7 @@ package com.homeworkgoto.cardsgame.data.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -18,6 +15,6 @@ public class DeckCard {
   private Integer gameId;
   private Integer rank;
   private Integer suit;
-  private Integer cardIndex;
+  private Integer cardPosition;
   private Integer dealtToPlayer;
 }
