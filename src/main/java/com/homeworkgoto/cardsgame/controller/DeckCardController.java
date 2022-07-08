@@ -49,7 +49,7 @@ public class DeckCardController {
 
     @Operation( description = "Show the all the Undealt cards")
     @PostMapping(value="/{gameId}/showUndealtCard")
-    public List<CardDescriptor> showUndealtCard(@PathVariable Integer gameId) {
+    public List<CardDescriptor> showUndealtCards(@PathVariable Integer gameId) {
         return deckCardService.showUndealtCard(gameId);
     }
 }
