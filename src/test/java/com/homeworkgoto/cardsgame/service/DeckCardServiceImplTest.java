@@ -6,6 +6,7 @@ import com.homeworkgoto.cardsgame.data.repository.DeckCardRepository;
 import com.homeworkgoto.cardsgame.mapper.CardMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -14,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +31,6 @@ public class DeckCardServiceImplTest extends TestConfig {
 
     @Spy
     private CardMapper cardMapper = new CardMapper();
-
 
     @Test
     void testDealCards() {

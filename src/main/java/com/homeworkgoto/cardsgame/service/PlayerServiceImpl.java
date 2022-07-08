@@ -9,12 +9,14 @@ import com.homeworkgoto.cardsgame.model.Rank;
 import com.homeworkgoto.cardsgame.model.Suit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
+@Service
 public class PlayerServiceImpl implements PlayerService {
 
     private final DeckCardRepository deckCardRepository;
